@@ -1,9 +1,5 @@
 package datametrics
 
-import (
-	"encoding/json"
-)
-
 type Payload struct {
 	Jsonrpc string `json:"jsonrpc"`
 	ID      int    `json:"id"`
@@ -34,11 +30,3 @@ type Payload struct {
 	} `json:"result"`
 }
 
-func NewPayload(jsonData []byte) (*Payload, error) {
-	payload := &Payload{}
-	err := json.Unmarshal(jsonData, payload)
-	if err != nil {
-		return nil, err
-	}
-	return payload, nil
-}

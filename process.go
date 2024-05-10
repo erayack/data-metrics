@@ -3,7 +3,7 @@ package datametrics
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 )
@@ -30,7 +30,7 @@ func processData(requestData RequestData, url string) []byte {
 	}
 
 	// Read the HTTP response
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal("Error reading HTTP response")
 	}
@@ -39,3 +39,4 @@ func processData(requestData RequestData, url string) []byte {
 
 	return body
 }
+
