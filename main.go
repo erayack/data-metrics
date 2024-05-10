@@ -1,4 +1,4 @@
-package datametrics
+package main
 
 import (
 	"bytes"
@@ -12,6 +12,7 @@ import (
 	"io"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 
@@ -100,7 +101,6 @@ func main() {
 			Id:      0,
 		}
 
-	// 	headerBody := processData(requestData, url)
 		headerBody := processData(requestData, url)
 
 		// Decode the response JSON
@@ -143,7 +143,7 @@ func main() {
 
 		gas, _ := strconv.ParseInt(responseBlock.Result.GasUsed[2:], 16, 64)
 		blockValueWei, _ := strconv.ParseInt(responseBlock.Result.Transactions[len(responseBlock.Result.Transactions)-1].Value[2:], 16, 64)
-		blockValueEth, _ := ConvertWeiToEther(big.NewInt(blockValueWei)).Float64()
+		blockValueEth, _ := weiToEther(big.NewInt(blockValueWei)).Float64()
 		// txns := fmt.Sprintf("%v", responseBlock.Result.Transactions)
 		// log.Debug().Str("transactions", txns).Msg("Dumping txns")
 		log.Info().Int("block_number", blockNumber).Int64("gas_used", gas).Int("txn_count", len(responseBlock.Result.Transactions)).Float64("block_value", blockValueEth).Msg(extraData)
@@ -158,10 +158,7 @@ func main() {
 	}
 }
 
-
-// ConvertWeiToEther converts wei to ether
-func ConvertWeiToEther(wei *big.Int) *big.Float {
-	fWei := new(big.Float)
-	fWei.SetString(wei.String())
-	return new(big.Float).Quo(fWei, big.NewFloat(1e18))
+// WeiToEther converts wei to ether
+func weiToEther(wei *big.Int) *big.Float {
+	return new(big.Float).Quo(new(big.Float).SetInt(wei), big.NewFloat(params.Ether))
 }

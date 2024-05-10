@@ -1,4 +1,4 @@
-package datametrics
+package main
 
 // Define the request and response data structures
 type RequestData struct {

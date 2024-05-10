@@ -1,4 +1,4 @@
-package datametrics
+package main
 
 type Payload struct {
 	Jsonrpc string `json:"jsonrpc"`

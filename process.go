@@ -1,4 +1,4 @@
-package datametrics
+package main
 
 import (
 	"bytes"
@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 )
+
 
 func processData(requestData RequestData, url string) []byte {
 
@@ -26,7 +27,7 @@ func processData(requestData RequestData, url string) []byte {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Fatal("Error sending HTTP request")
+		log.Fatalf("Error sending HTTP request: %v", err) 
 	}
 
 	// Read the HTTP response
@@ -39,4 +40,3 @@ func processData(requestData RequestData, url string) []byte {
 
 	return body
 }
-
