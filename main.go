@@ -25,7 +25,9 @@ func main() {
 	blockNumberChan := make(chan int, 20)
 
 	// Define the URL
+	
 	url := "http://localhost:8545"
+
 
 	go func(blockNumbersChannel chan int) {
 		blockNumber := 17815200

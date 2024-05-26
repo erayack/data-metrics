@@ -4,6 +4,7 @@ go 1.21.6
 
 require (
 	github.com/ethereum/go-ethereum v1.14.3
+	github.com/holiman/billy v0.0.0-20240322075458-72a4e81ec6da
 	github.com/rs/zerolog v1.32.0
 )
 
